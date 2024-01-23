@@ -16,7 +16,7 @@ create table if not exists raw.products (
 );
 
 
-\COPY raw.products from ./Amazon-Products.csv delimiter ',' csv header;
+\COPY raw.products from PROGRAM 'gzip -c -d ./amazon-products.csv.gz' delimiter ',' csv header;
 
 commit;
 
@@ -30,7 +30,7 @@ create table if not exists ebisaan.main_categories (
 
 create table if not exists ebisaan.sub_categories (
 	id serial primary key,
-	name text
+	name text,
 	main_category_id integer
 );
 
