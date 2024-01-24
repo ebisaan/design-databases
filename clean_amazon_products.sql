@@ -24,18 +24,18 @@ commit;
 begin;
 create schema if not exists ebisaan;
 create table if not exists ebisaan.main_categories (
-	id serial primary key,
+	id bigserial primary key,
 	name text
 );
 
 create table if not exists ebisaan.sub_categories (
-	id serial primary key,
+	id bigserial primary key,
 	name text,
 	main_category_id integer
 );
 
 create table if not exists ebisaan.currencies (
-	id serial primary key,
+	id bigserial primary key,
 	code text,
 	symbol text
 );
@@ -45,11 +45,11 @@ create table if not exists ebisaan.products(
 	name text,
 	main_category_id integer,
 	sub_category_id integer,
-	stock_number integer,
+	stock_number bigint,
 	image text,
-	discount_price numeric(12, 2),
-	actual_price numeric(12, 2),
-	currency_id integer
+	discount_price numeric,
+	actual_price numeric,
+	currency_id bigint
 );
 
 create or replace function ebisaan.random(a int, b int)
