@@ -73,16 +73,16 @@ select rp.name, mc.id, sc.id, ebisaan.random(1, 1000), rp.image, regexp_replace(
 from raw.products rp join ebisaan.main_categories mc on rp.main_category = mc.name join ebisaan.sub_categories sc on rp.sub_category = sc.name left join ebisaan.currencies c on substring(rp.actual_price from 1 for 1) = c.symbol
 where rp.actual_price is not NULL;
 
-alter table if exists ebisaan.main_categories add constraint main_categories_name_unique_idx unique (id);
-alter table if exists ebisaan.sub_categories add constraint sub_categories_name_unique_idx unique (id);
-alter table if exists ebisaan.currencies add constraint currencies_code_unique_idx unique (code);
-alter table if exists ebisaan.currencies add constraint currencies_symbol_unique_idx unique (symbol);
-alter table if exists ebisaan.currencies add constraint currencies_code_symbol_unique_idx unique (code, symbol);
-
-alter table if exists ebisaan.sub_categories add constraint sub_categories_main_category_id_fkey foreign key (main_category_id) REFERENCES ebisaan.main_categories(id);
-alter table if exists ebisaan.products add constraint products_main_category_id_fkey foreign key (main_category_id) REFERENCES ebisaan.main_categories(id);
-alter table if exists ebisaan.products add constraint products_sub_category_id_fkey foreign key (sub_category_id) REFERENCES ebisaan.sub_categories(id);
-alter table if exists ebisaan.products add constraint products_currency_id_fkey foreign key (currency_id) REFERENCES ebisaan.currencies(id);
+-- alter table if exists ebisaan.main_categories add constraint main_categories_name_unique_idx unique (id);
+-- alter table if exists ebisaan.sub_categories add constraint sub_categories_name_unique_idx unique (id);
+-- alter table if exists ebisaan.currencies add constraint currencies_code_unique_idx unique (code);
+-- alter table if exists ebisaan.currencies add constraint currencies_symbol_unique_idx unique (symbol);
+-- alter table if exists ebisaan.currencies add constraint currencies_code_symbol_unique_idx unique (code, symbol);
+-- 
+-- alter table if exists ebisaan.sub_categories add constraint sub_categories_main_category_id_fkey foreign key (main_category_id) REFERENCES ebisaan.main_categories(id);
+-- alter table if exists ebisaan.products add constraint products_main_category_id_fkey foreign key (main_category_id) REFERENCES ebisaan.main_categories(id);
+-- alter table if exists ebisaan.products add constraint products_sub_category_id_fkey foreign key (sub_category_id) REFERENCES ebisaan.sub_categories(id);
+-- alter table if exists ebisaan.products add constraint products_currency_id_fkey foreign key (currency_id) REFERENCES ebisaan.currencies(id);
 
 drop schema if exists raw cascade;
 commit;
